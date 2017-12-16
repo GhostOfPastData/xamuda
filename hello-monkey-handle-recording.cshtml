@@ -1,0 +1,9 @@
+﻿@{
+    Response.ContentType = "text/xml";
+}
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say>Thanks for recording your message... now listen to what you recorded.</Say>
+    <Play>@Request["RecordingUrl"]</Play>
+    <Say>Goodbye.</Say>
+</Response>

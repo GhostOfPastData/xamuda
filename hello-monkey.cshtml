@@ -1,0 +1,34 @@
+﻿@{
+    // make an associative array of senders we know, indexed by phone number
+    Dictionary<string, string> people = new Dictionary<string, string>() {
+        {"+14158675309","Curious George"},
+        {"+14158675310","Boots"},
+        {"+14158675311","Virgil"},
+        {"+14158675312","Marcel"},
+    		{"+17203458921","Jane"},
+    		{"+13035476539","Blair"}
+    };
+
+    // if the caller is known, then greet them by name
+    // otherwise, consider them just another person
+    string name = "Caller";
+    if (Request["From"] != null && people.Keys.Contains(Request["From"]))
+    {
+        name = people[Request["From"]];
+    }
+
+    // now greet the caller
+    Response.ContentType = "text/xml";
+}
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say>Hello @name.</Say>
+    //<Play>http://demo.twilio.com/hellomonkey/monkey.mp3</Play>
+    <Gather numDigits="1" action="hello-monkey14-handle-key.cshtml" method="POST">
+        <Say>
+            To speak with an agent, press 1.
+            Press 2 to record your question.
+            Press any other key to hangup.
+        </Say>
+    </Gather>
+</Response>
